@@ -40,6 +40,7 @@ const FullVideo: React.FC<Props> = ({ video, onCloseVideo }: Props) => {
         url={video}
         width='100%'
         height='80vh'
+        controls
       />
     </Box>
   )
