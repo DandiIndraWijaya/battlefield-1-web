@@ -20,3 +20,11 @@
 .react-player > div {
   position: absolute; 
 }
+
+.slick-slide.slick-center img {
+  transform: scale(0.8);
+}
+
+.image_carousel {
+  transform: scale(0.7);
+}

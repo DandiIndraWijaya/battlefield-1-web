@@ -4,12 +4,13 @@ import Layout from '../../common/Layout'
 
 import PageLoader from '../../common/PageLoader'
 import Jumbotron from './Jumbotron'
+import WarStory from './WarStory'
 
 const HomeComponent: React.FC = () => {
   const [showPageLoader, setShowPageLoader] = useState(true)
 
   useEffect(() => {
-    setTimeout(() => setShowPageLoader(false), 9000)
+    setTimeout(() => setShowPageLoader(false), 5000)
   }, [])
 
   if (showPageLoader) {
@@ -20,6 +21,7 @@ const HomeComponent: React.FC = () => {
     <Layout>
       <BgMusic />
       <Jumbotron />
+      <WarStory />
     </Layout>
   )
 }

@@ -44,7 +44,7 @@ const Jumbotron: React.FC = () => {
         backgroundRepeat: 'no-repeat',
         textAlign: 'center',
         marginTop: -12,
-        paddingBottom: 40
+        paddingBottom: 20
       }}
     >
       {/* Battlefield 1 Logo */}

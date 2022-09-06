@@ -9,7 +9,7 @@ interface Props {
 const Layout: React.FC<Props> = ({ children }: Props) => {
   return <Box
     sx={{
-      backgroundColor: '#0C0B0B'
+      backgroundColor: '#0b0a10'
     }}
   >
 

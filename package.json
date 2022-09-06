@@ -23,11 +23,14 @@
     "react-audio-player": "^0.17.0",
     "react-dom": "latest",
     "react-player": "^2.10.1",
-    "react-transition-group": "^4.4.5"
+    "react-slick": "^0.29.0",
+    "react-transition-group": "^4.4.5",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@types/node": "latest",
     "@types/react": "latest",
+    "@types/react-slick": "^0.23.10",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "eslint": "^8.0.1",
     "eslint-config-next": "latest",
