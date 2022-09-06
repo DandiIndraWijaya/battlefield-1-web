@@ -2,13 +2,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Box, IconButton } from '@mui/material'
 import { VolumeUpRounded, VolumeOffRounded } from '@mui/icons-material'
-// import ReactAudioPlayer from 'react-audio-player'
 
-interface Props {
-  children: React.ReactNode
-}
-
-const Layout: React.FC<Props> = ({ children }: Props) => {
+const BgMusic: React.FC = () => {
   const [bgMusicPlaying, setBgMusicPlaying] = useState(false)
   const [hasError, setHasError] = useState(false)
   const bgMusic = useRef(new Audio('/sounds/battlefield_one.mp3'))
@@ -39,38 +34,31 @@ const Layout: React.FC<Props> = ({ children }: Props) => {
 
   return <Box
     sx={{
-      backgroundColor: '#0C0B0B'
+      position: 'fixed',
+      top: 20,
+      right: 20
     }}
   >
-    <Box
-      sx={{
-        position: 'fixed',
-        top: 20,
-        right: 20
-      }}
+    <IconButton
+      onClick={toggleBackgroundMusic}
     >
-      <IconButton
-        onClick={toggleBackgroundMusic}
-      >
-        {
-          bgMusicPlaying
-            ? <VolumeUpRounded
-                sx={{
-                  color: 'primary.main',
-                  fontSize: 60
-                }}
-              />
-            : <VolumeOffRounded
-                sx={{
-                  color: 'primary.main',
-                  fontSize: 60
-                }}
-              />
-        }
-      </IconButton>
-    </Box>
-    {children}
+      {
+        bgMusicPlaying
+          ? <VolumeUpRounded
+              sx={{
+                color: 'primary.main',
+                fontSize: 60
+              }}
+            />
+          : <VolumeOffRounded
+              sx={{
+                color: 'primary.main',
+                fontSize: 60
+              }}
+            />
+      }
+    </IconButton>
   </Box>
 }
 
-export default Layout
+export default BgMusic
