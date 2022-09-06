@@ -1,41 +1,84 @@
 import React, { useState } from 'react'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import ReactPlayer from 'react-player/file'
+import { PlayArrow } from '@mui/icons-material'
 
 interface Props {
   onClick: (index: number) => void
   index: number
+  video: string
+  title: string
 }
 
-const VideoItem: React.FC<Props> = ({ onClick, index }: Props) => {
-  const [onPlaying, setOnPlaying] = useState(false)
+const VideoItem: React.FC<Props> = ({
+  onClick,
+  index,
+  video,
+  title
+}: Props) => {
+  const [onMouseOver, setOnMouseOver] = useState(false)
   return (
     <Box
       sx={{
-        backgroundColor: 'dark',
-        width: '100%',
-        height: 160,
-        boxShadow: '8px 8px 8px rgba(0, 0, 0, 0.25)',
-        borderRadius: 1,
-        paddingX: 1,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        cursor: 'pointer'
+        padding: 1,
+        border: '1px solid',
+        borderColor: onMouseOver ? 'primary.main' : 'gray',
+        borderRadius: 2
       }}
-      onMouseOver={() => setOnPlaying(true)}
-      onMouseLeave={() => setOnPlaying(false)}
-      onClick={() => onClick(index)}
     >
-      <ReactPlayer
-        url="/videos/trailer1.mp4"
-        loop={true}
-        width="100%"
-        height={150}
-        playing={onPlaying}
-        muted
-        light={onPlaying ? false : '/images/trailer1_thumbnail.jpg' }
-      />
+      <Box
+        sx={{ textAlign: 'left', paddingX: 1 }}
+      >
+        <Typography
+          sx={{
+            color: onMouseOver ? 'primary.main' : 'gray',
+            fontWeight: 'semi-bold',
+            letterSpacing: 2
+          }}
+        >
+          {title}
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          width: '100%',
+          height: 160,
+          borderRadius: 1,
+          paddingX: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          position: 'relative'
+        }}
+        onMouseOver={() => setOnMouseOver(true)}
+        onMouseLeave={() => setOnMouseOver(false)}
+        onClick={() => onClick(index)}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'absolute'
+          }}
+        >
+          <PlayArrow
+            sx={{
+              color: onMouseOver ? 'primary.main' : 'gray',
+              fontSize: onMouseOver ? 110 : 70
+            }}
+          />
+        </Box>
+        <ReactPlayer
+          url={video}
+          loop={true}
+          width="100%"
+          height={150}
+          playing={true}
+          muted
+        />
+      </Box>
     </Box>
   )
 }

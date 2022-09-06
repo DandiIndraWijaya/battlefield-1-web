@@ -1,25 +1,37 @@
 import React, { useState } from 'react'
-import { Box, Grid, IconButton } from '@mui/material'
-import { Close } from '@mui/icons-material'
+import { Box, Grid } from '@mui/material'
 
 import VideoItem from './VideoItem'
-import ReactPlayer from 'react-player/youtube'
+import FullVideo from './FullVideo'
 
 const Jumbotron: React.FC = () => {
   const videos = [
-    'https://www.youtube.com/watch?v=c7nRTF2SowQ&t=13s',
-    'https://www.youtube.com/watch?v=4pY3hlQEOc0',
-    'https://www.youtube.com/watch?v=Bau49VAvJyo'
+    {
+      title: 'Reveal Trailer',
+      full: 'https://www.youtube.com/watch?v=c7nRTF2SowQ&t=13s',
+      short: '/videos/trailer1.mp4'
+    },
+    {
+      title: 'Gameplay Trailer',
+      full: 'https://www.youtube.com/watch?v=4pY3hlQEOc0',
+      short: '/videos/trailer2.mp4'
+    },
+    {
+      title: 'Story Trailer',
+      full: 'https://www.youtube.com/watch?v=Bau49VAvJyo',
+      short: '/videos/trailer3.mp4'
+    }
   ]
-  const [onPlayingVideo, setOnPlayingVideo] = useState<string>('')
+
+  const [playingVideo, setPlayingVideo] = useState<string>('')
 
   const onClickVideoItem = (index: number): void => {
-    const selectedVideoTrailer = videos[index]
-    setOnPlayingVideo(selectedVideoTrailer)
+    const selectedVideoTrailer = videos[index].full
+    setPlayingVideo(selectedVideoTrailer)
   }
 
   const onCloseVideo = (): void => {
-    setOnPlayingVideo('')
+    setPlayingVideo('')
   }
 
   return (
@@ -35,44 +47,24 @@ const Jumbotron: React.FC = () => {
         paddingBottom: 40
       }}
     >
+      {/* Battlefield 1 Logo */}
       <img
         style={{ width: '50%', marginTop: 100 }}
         src="/images/battlefield_1_logo.png"
         alt="Battlefield 1 Logo"
       />
-      <Box
-        sx={{
-          textAlign: 'center',
-          margin: 'auto',
-          width: 600,
-          height: 400,
-          paddingY: 3,
-          marginTop: 0
-        }}
-      >
-        {
-          onPlayingVideo !== '' &&
-          <>
-            <Box
-              sx={{
-                textAlign: 'right'
-              }}
-            >
-              <IconButton onClick={onCloseVideo}>
-                <Close />
-              </IconButton>
-            </Box>
-            <ReactPlayer
-              url={onPlayingVideo}
-              width='100%'
-            />
-          </>
-        }
-      </Box>
+
+      {/* Full Video */}
+      <FullVideo
+        video={playingVideo}
+        onCloseVideo={onCloseVideo}
+      />
+
+      {/* List of Short Videos */}
       <Box
         sx={{
           paddingX: 25,
-          marginTop: 7
+          marginTop: 60
         }}
       >
         <Grid container spacing={5} alignContent='center' alignItems="center">
@@ -82,6 +74,8 @@ const Jumbotron: React.FC = () => {
                 <VideoItem
                   onClick={onClickVideoItem}
                   index={key}
+                  video={video.short}
+                  title={video.title}
                 />
               </Grid>
             ))
