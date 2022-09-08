@@ -40,11 +40,15 @@ const Soundtrack: React.FC = () => {
   const onChangeDuration = (duration: string): void => {
     soundtrackPlaying.current.currentTime = parseInt(duration) / 100 *
      soundtrackPlaying.current.duration
+    const buffered = soundtrackPlaying.current.buffered
+    const loaded = 100 * buffered.end(0) / soundtrackPlaying.current.duration
+    setSoundtrackBuffer(loaded.toFixed(2))
   }
 
   const loop = (): void => {
     if (playingIndex !== -1) {
       const buffered = soundtrackPlaying.current.buffered
+      console.log(buffered)
       let loaded
       let played
       if (buffered.length !== 0) {
