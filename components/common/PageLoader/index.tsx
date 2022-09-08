@@ -11,6 +11,10 @@ const PageLoader: React.FC = () => {
   useEffect(() => {
     setTimeout(() => setShowLogo(true), 1500)
     setTimeout(() => setShowLoader(true), 2500)
+    setTimeout(() => {
+      setShowLogo(false)
+      setShowLoader(false)
+    }, 4500)
   }, [])
 
   return <Box
@@ -43,7 +47,7 @@ const PageLoader: React.FC = () => {
     </CSSTransition>
     <CSSTransition
       in={showLogo}
-      timeout={1500}
+      timeout={1000}
       unmountOnExit
       classNames="animate__animated animate__fadeIn animate__slower"
     >

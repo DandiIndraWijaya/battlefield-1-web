@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react'
 import { Box, Typography, useMediaQuery } from '@mui/material'
 import Slider from 'react-slick'

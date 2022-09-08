@@ -3,25 +3,29 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Box, IconButton } from '@mui/material'
 import { VolumeUpRounded, VolumeOffRounded } from '@mui/icons-material'
 
-const BgMusic: React.FC = () => {
-  const [bgMusicPlaying, setBgMusicPlaying] = useState(false)
+interface Props {
+  isBgMusicPlaying: boolean
+  toggleBgMusic: () => void
+}
+
+const BgMusic: React.FC<Props> = ({
+  isBgMusicPlaying,
+  toggleBgMusic
+}: Props) => {
+  // const [bgMusicPlaying, setBgMusicPlaying] = useState(false)
   const [hasError, setHasError] = useState(false)
   const bgMusic = useRef(new Audio('/sounds/battlefield_one.mp3'))
 
-  bgMusic.current.onended = () => {
-    setBgMusicPlaying(false)
-  }
+  // bgMusic.current.onended = () => {
+  //   setBgMusicPlaying(false)
+  // }
 
   bgMusic.current.onplay = () => {
     setHasError(false)
   }
 
-  const toggleBackgroundMusic = (): void => {
-    setBgMusicPlaying(!bgMusicPlaying)
-  }
-
   useEffect(() => {
-    if (bgMusicPlaying) {
+    if (isBgMusicPlaying) {
       bgMusic.current.play().then(() => {
         // bgMusic is playing.
       }).catch(() => {
@@ -30,7 +34,7 @@ const BgMusic: React.FC = () => {
     } else if (!hasError) {
       bgMusic.current.pause()
     }
-  }, [bgMusicPlaying, hasError])
+  }, [isBgMusicPlaying, hasError])
 
   return <Box
     sx={{
@@ -40,10 +44,10 @@ const BgMusic: React.FC = () => {
     }}
   >
     <IconButton
-      onClick={toggleBackgroundMusic}
+      onClick={toggleBgMusic}
     >
       {
-        bgMusicPlaying
+        isBgMusicPlaying
           ? <VolumeUpRounded
               sx={{
                 color: 'primary.main',
