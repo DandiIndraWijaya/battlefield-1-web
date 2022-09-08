@@ -34,6 +34,10 @@ const Soundtrack: React.FC = () => {
         soundtrackPlaying.current.pause()
       }
     }
+    setSoundtrackBuffer('')
+    setSountrackPlayedTime('')
+    setSoundtrackCurrentTime(0)
+    setSoundtrackPause(false)
     setPlayingIndex(index)
   }
 
