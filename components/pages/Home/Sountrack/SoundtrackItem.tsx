@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Box, Typography } from '@mui/material'
 import { PlayCircleFilled, PauseCircleFilled } from '@mui/icons-material'
+// import ReactSlider from 'react-slider'
 
 interface Props {
   title: string
@@ -10,6 +11,9 @@ interface Props {
   buffer: string
   playedTime: string
   isPause: boolean
+  onClick: (index: number) => void
+  onChangeDuration: (duration: string) => void
+  index: number
 }
 
 const SoundtrackItem: React.FC<Props> = ({
@@ -19,10 +23,12 @@ const SoundtrackItem: React.FC<Props> = ({
   isPlay,
   buffer,
   playedTime,
-  isPause
+  isPause,
+  onClick,
+  onChangeDuration,
+  index
 }: Props) => {
   const [isMouseOver, setIsOuMouseOver] = useState(false)
-  // const soundtrack = useRef(new Audio(source))
 
   const onMouseOver = (): void => {
     setIsOuMouseOver(true)
@@ -31,15 +37,6 @@ const SoundtrackItem: React.FC<Props> = ({
   const onMouseLeave = (): void => {
     setIsOuMouseOver(false)
   }
-
-  // var audio = document.querySelector('audio');
-  // var percentages = document.querySelectorAll('span');
-
-  // useEffect(() => {
-  //   if(isPlay){
-  //     soundtrack.current.onprogress
-  //   }
-  // }, [isPlay])
 
   return (
     <Box
@@ -53,21 +50,35 @@ const SoundtrackItem: React.FC<Props> = ({
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}
     >
-      <Box>
+      <Box
+        sx={{
+          width: '30px'
+        }}
+        onClick={() => onClick(index)}
+      >
         {
-          isPause
-            ? <PauseCircleFilled
-                sx={{
-                  marginTop: '5px',
-                  color: isMouseOver || isPlay ? 'primary.main' : 'gray'
-                }}
-              />
-            : <PlayCircleFilled
-                sx={{
-                  marginTop: '5px',
-                  color: isMouseOver || isPlay ? 'primary.main' : 'gray'
-                }}
-              />
+          isPlay && isPause && <PlayCircleFilled
+            sx={{
+              marginTop: '5px',
+              color: isMouseOver || isPlay ? 'primary.main' : 'gray'
+            }}
+          />
+        }
+        {
+          isPlay && !isPause && <PauseCircleFilled
+            sx={{
+              marginTop: '5px',
+              color: isMouseOver || isPlay ? 'primary.main' : 'gray'
+            }}
+          />
+        }
+        {
+          !isPlay && <PlayCircleFilled
+            sx={{
+              marginTop: '5px',
+              color: isMouseOver || isPlay ? 'primary.main' : 'gray'
+            }}
+          />
         }
       </Box>
       <Box
@@ -75,12 +86,15 @@ const SoundtrackItem: React.FC<Props> = ({
           paddingX: '10px',
           width: '100%'
         }}>
-        <Box sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          color: isMouseOver || isPlay ? 'primary.main' : 'gray'
-        }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            color: isMouseOver || isPlay ? 'primary.main' : 'gray'
+          }}
+          onClick={() => onClick(index)}
+        >
           <Typography
             sx={{
               fontSize: '14px'
@@ -99,28 +113,45 @@ const SoundtrackItem: React.FC<Props> = ({
         </Box>
         {
           isPlay &&
-          <Box sx={{
-            position: 'relative',
-            width: '100%'
-          }}>
+          <Box
+            sx={{
+              position: 'relative',
+              width: '100%',
+              height: '10px'
+            }}
+          >
             <Box
               sx={{
-                width: `${playedTime}%`,
-                borderBottom: '1px solid',
-                borderColor: 'primary.main',
-                marginTop: '10px',
+                width: '100%',
                 position: 'absolute',
                 top: 0
               }}
-            />
+            >
+              <input
+                style={{
+                  width: '100%',
+                  position: 'absolute',
+                  top: '2px'
+                }}
+                type="range"
+                min="1"
+                max="100"
+                value={parseInt(playedTime)}
+                onChange={(e) => {
+                  onChangeDuration(e.target.value)
+                }}
+              />
+            </Box>
+            <Box>
+              <Typography>{playedTime}</Typography>
+            </Box>
             <Box
               sx={{
                 width: `${buffer}%`,
                 borderBottom: '1px solid',
                 borderColor: 'rgba(241, 127, 26, 0.35)',
-                marginTop: '10px',
                 position: 'absolute',
-                top: 0
+                top: '5px'
               }}
             />
           </Box>

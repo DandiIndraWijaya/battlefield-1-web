@@ -36,25 +36,23 @@ const Soundtrack: React.FC = () => {
     setPlayingIndex(index)
   }
 
+  const onChangeDuration = (duration: string): void => {
+    soundtrackPlaying.current.currentTime = parseInt(duration) / 100 *
+     soundtrackPlaying.current.duration
+  }
+
   const loop = (): void => {
     if (playingIndex !== -1) {
       const buffered = soundtrackPlaying.current.buffered
       let loaded
       let played
       if (buffered.length !== 0) {
-        // console.log(title)
         loaded = 100 * buffered.end(0) / soundtrackPlaying.current.duration
         // eslint-disable-next-line max-len
         played = 100 * soundtrackPlaying.current.currentTime / soundtrackPlaying.current.duration
         setSoundtrackBuffer(loaded.toFixed(2))
         setSountrackPlayedTime(played.toFixed(2))
       }
-
-      // if (buffered.length !== 0) {
-      //   setTimeout(loop, 50)
-      // } else {
-      //   console.log('finnish')
-      // }
       setTimeout(loop, 50)
     }
   }
@@ -73,7 +71,9 @@ const Soundtrack: React.FC = () => {
   }, [playingIndex])
 
   return (
-    <Box sx={{ paddingBottom: '200px' }}>
+    <Box sx={{
+      paddingBottom: '200px'
+    }}>
       <Box
         sx={{
           width: '100%',
@@ -91,10 +91,13 @@ const Soundtrack: React.FC = () => {
             width: '30%',
             backgroundColor: 'rgba(23, 23, 29, 0.83)',
             height: '500px'
-          // marginTop: 25
           }}
         >
-          <Box sx={{ paddingX: '15px', paddingTop: '15px' }}>
+          <Box
+            sx={{
+              paddingX: '15px',
+              paddingTop: '15px'
+            }}>
             <Typography
               sx={{
                 color: 'gray',
@@ -117,7 +120,10 @@ const Soundtrack: React.FC = () => {
             {
               soundtracks.map((soundtrack, key) => {
                 return (
-                  <Box key={key} onClick={() => onChangePlayingIndex(key)}>
+                  <Box
+                    key={key}
+                    // onClick={() => onChangePlayingIndex(key)}
+                  >
                     <SoundtrackItem
                       title={soundtrack.title}
                       source={soundtrack.source}
@@ -125,7 +131,10 @@ const Soundtrack: React.FC = () => {
                       isPlay={key === playingIndex}
                       buffer={soundtrackBuffer}
                       playedTime={soundtrackPlayedTime}
-                      isPause={soundtrackPause && key === playingIndex}
+                      isPause={soundtrackPause}
+                      onClick={onChangePlayingIndex}
+                      onChangeDuration={onChangeDuration}
+                      index={key}
                     />
                   </Box>
                 )
