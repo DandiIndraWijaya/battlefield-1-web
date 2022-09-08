@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Box, Typography } from '@mui/material'
 import { PlayCircleFilled, PauseCircleFilled } from '@mui/icons-material'
+import convertTime from '../../../../src/time'
 // import ReactSlider from 'react-slider'
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
   buffer: string
   playedTime: string
   isPause: boolean
+  currentTime: number
   onClick: (index: number) => void
   onChangeDuration: (duration: string) => void
   index: number
@@ -24,6 +26,7 @@ const SoundtrackItem: React.FC<Props> = ({
   buffer,
   playedTime,
   isPause,
+  currentTime,
   onClick,
   onChangeDuration,
   index
@@ -44,15 +47,15 @@ const SoundtrackItem: React.FC<Props> = ({
         paddingY: '5px',
         paddingX: '15px',
         display: 'flex',
-        alignItems: 'center',
-        cursor: 'pointer'
+        alignItems: 'center'
       }}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}
     >
       <Box
         sx={{
-          width: '30px'
+          width: '30px',
+          cursor: 'pointer'
         }}
         onClick={() => onClick(index)}
       >
@@ -91,7 +94,8 @@ const SoundtrackItem: React.FC<Props> = ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            color: isMouseOver || isPlay ? 'primary.main' : 'gray'
+            color: isMouseOver || isPlay ? 'primary.main' : 'gray',
+            cursor: 'pointer'
           }}
           onClick={() => onClick(index)}
         >
@@ -101,60 +105,65 @@ const SoundtrackItem: React.FC<Props> = ({
             }}>
             {title}
           </Typography>
-          {
-            !isPlay &&
-            <Typography
-              sx={{
-                fontSize: '14px'
-              }}>
-              {time}
-            </Typography>
-          }
+          <Typography
+            sx={{
+              fontSize: '14px'
+            }}>
+            {time}
+          </Typography>
         </Box>
         {
           isPlay &&
-          <Box
-            sx={{
-              position: 'relative',
-              width: '100%',
-              height: '10px'
-            }}
-          >
+          <>
             <Box
               sx={{
+                position: 'relative',
                 width: '100%',
-                position: 'absolute',
-                top: 0
+                height: '10px'
               }}
             >
-              <input
-                style={{
+              <Box
+                sx={{
                   width: '100%',
                   position: 'absolute',
-                  top: '2px'
+                  top: 0
                 }}
-                type="range"
-                min="1"
-                max="100"
-                value={parseInt(playedTime)}
-                onChange={(e) => {
-                  onChangeDuration(e.target.value)
+              >
+                <input
+                  style={{
+                    width: '100%',
+                    position: 'absolute',
+                    top: '2px'
+                  }}
+                  type="range"
+                  min="1"
+                  max="100"
+                  value={parseInt(playedTime)}
+                  onChange={(e) => {
+                    onChangeDuration(e.target.value)
+                  }}
+                />
+              </Box>
+              <Box
+                sx={{
+                  width: `${buffer}%`,
+                  borderBottom: '1px solid',
+                  borderColor: 'rgba(241, 127, 26, 0.35)',
+                  position: 'absolute',
+                  top: '5px'
                 }}
               />
             </Box>
             <Box>
-              <Typography>{playedTime}</Typography>
+              <Typography sx={{
+                fontSize: '14px',
+                color: 'white',
+                marginTop: '5px'
+              }}>
+                {convertTime(Math.floor(currentTime))}
+              </Typography>
             </Box>
-            <Box
-              sx={{
-                width: `${buffer}%`,
-                borderBottom: '1px solid',
-                borderColor: 'rgba(241, 127, 26, 0.35)',
-                position: 'absolute',
-                top: '5px'
-              }}
-            />
-          </Box>
+          </>
         }
       </Box>
     </Box>

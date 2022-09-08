@@ -19,6 +19,7 @@ const Soundtrack: React.FC = () => {
   const [playingIndex, setPlayingIndex] = useState(-1)
   const [soundtrackBuffer, setSoundtrackBuffer] = useState('')
   const [soundtrackPlayedTime, setSountrackPlayedTime] = useState('')
+  const [soundtrackCurrentTime, setSoundtrackCurrentTime] = useState(0)
   const [soundtrackPause, setSoundtrackPause] = useState(false)
   const soundtrackPlaying = useRef(new Audio(''))
 
@@ -50,8 +51,11 @@ const Soundtrack: React.FC = () => {
         loaded = 100 * buffered.end(0) / soundtrackPlaying.current.duration
         // eslint-disable-next-line max-len
         played = 100 * soundtrackPlaying.current.currentTime / soundtrackPlaying.current.duration
+        setSoundtrackCurrentTime(soundtrackPlaying.current.currentTime)
         setSoundtrackBuffer(loaded.toFixed(2))
         setSountrackPlayedTime(played.toFixed(2))
+
+        soundtrackPlaying.current.onended = () => setPlayingIndex(-1)
       }
       setTimeout(loop, 50)
     }
@@ -134,6 +138,7 @@ const Soundtrack: React.FC = () => {
                       isPause={soundtrackPause}
                       onClick={onChangePlayingIndex}
                       onChangeDuration={onChangeDuration}
+                      currentTime={soundtrackCurrentTime}
                       index={key}
                     />
                   </Box>
