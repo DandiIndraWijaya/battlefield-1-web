@@ -33,12 +33,13 @@ const Soundtrack: React.FC = () => {
         setSoundtrackPause(true)
         soundtrackPlaying.current.pause()
       }
+    } else {
+      setSoundtrackBuffer('')
+      setSountrackPlayedTime('')
+      setSoundtrackCurrentTime(0)
+      setSoundtrackPause(false)
+      setPlayingIndex(index)
     }
-    setSoundtrackBuffer('')
-    setSountrackPlayedTime('')
-    setSoundtrackCurrentTime(0)
-    setSoundtrackPause(false)
-    setPlayingIndex(index)
   }
 
   const onChangeDuration = (duration: string): void => {
