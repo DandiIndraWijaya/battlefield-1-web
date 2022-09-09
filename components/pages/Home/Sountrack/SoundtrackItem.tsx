@@ -44,10 +44,10 @@ const SoundtrackItem: React.FC<Props> = ({
   return (
     <Box
       sx={{
-        paddingY: '5px',
         paddingX: '15px',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        height: '45px'
       }}
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}
@@ -150,7 +150,8 @@ const SoundtrackItem: React.FC<Props> = ({
                   borderBottom: '1px solid',
                   borderColor: 'rgba(241, 127, 26, 0.35)',
                   position: 'absolute',
-                  top: '5px'
+                  top: '5px',
+                  transition: 'width 1s'
                 }}
               />
             </Box>

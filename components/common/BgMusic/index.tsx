@@ -12,13 +12,8 @@ const BgMusic: React.FC<Props> = ({
   isBgMusicPlaying,
   toggleBgMusic
 }: Props) => {
-  // const [bgMusicPlaying, setBgMusicPlaying] = useState(false)
   const [hasError, setHasError] = useState(false)
   const bgMusic = useRef(new Audio('/sounds/battlefield_one.mp3'))
-
-  // bgMusic.current.onended = () => {
-  //   setBgMusicPlaying(false)
-  // }
 
   bgMusic.current.onplay = () => {
     setHasError(false)
@@ -27,7 +22,6 @@ const BgMusic: React.FC<Props> = ({
   useEffect(() => {
     if (isBgMusicPlaying) {
       bgMusic.current.play().then(() => {
-        // bgMusic is playing.
       }).catch(() => {
         setHasError(true)
       })
@@ -36,33 +30,29 @@ const BgMusic: React.FC<Props> = ({
     }
   }, [isBgMusicPlaying, hasError])
 
-  return <Box
-    sx={{
-      position: 'fixed',
-      top: 20,
-      right: 20
-    }}
-  >
-    <IconButton
-      onClick={toggleBgMusic}
-    >
-      {
-        isBgMusicPlaying
-          ? <VolumeUpRounded
-              sx={{
-                color: 'primary.main',
-                fontSize: 60
-              }}
-            />
-          : <VolumeOffRounded
-              sx={{
-                color: 'primary.main',
-                fontSize: 60
-              }}
-            />
-      }
-    </IconButton>
-  </Box>
+  return (
+    <Box>
+      <IconButton
+        onClick={toggleBgMusic}
+      >
+        {
+          isBgMusicPlaying
+            ? <VolumeUpRounded
+                sx={{
+                  color: 'primary.main',
+                  fontSize: 50
+                }}
+              />
+            : <VolumeOffRounded
+                sx={{
+                  color: 'primary.main',
+                  fontSize: 50
+                }}
+              />
+        }
+      </IconButton>
+    </Box>
+  )
 }
 
 export default BgMusic

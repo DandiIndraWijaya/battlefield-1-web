@@ -1,24 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Box, Typography } from '@mui/material'
 import SoundtrackItem from './SoundtrackItem'
-
-const soundtracks = [
-  {
-    title: 'Battlefield One',
-    source: '/sounds/battlefield_one.mp3',
-    time: '3:21'
-  },
-  {
-    title: 'The War to End All Wars',
-    source: '/sounds/2_The_War_to_End_All_Wars.mp3',
-    time: '3:24'
-  }
-]
+import soundtracks from '../../../../data/soundtrack'
 
 const Soundtrack: React.FC = () => {
   const [playingIndex, setPlayingIndex] = useState(-1)
-  const [soundtrackBuffer, setSoundtrackBuffer] = useState('')
-  const [soundtrackPlayedTime, setSountrackPlayedTime] = useState('')
+  const [soundtrackBuffer, setSoundtrackBuffer] = useState('0')
+  const [soundtrackPlayedTime, setSountrackPlayedTime] = useState('0')
   const [soundtrackCurrentTime, setSoundtrackCurrentTime] = useState(0)
   const [soundtrackPause, setSoundtrackPause] = useState(false)
   const soundtrackPlaying = useRef(new Audio(''))
@@ -34,8 +22,8 @@ const Soundtrack: React.FC = () => {
         soundtrackPlaying.current.pause()
       }
     } else {
-      setSoundtrackBuffer('')
-      setSountrackPlayedTime('')
+      setSoundtrackBuffer('0')
+      setSountrackPlayedTime('0')
       setSoundtrackCurrentTime(0)
       setSoundtrackPause(false)
       setPlayingIndex(index)

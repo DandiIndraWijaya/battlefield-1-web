@@ -39,20 +39,12 @@ const Jumbotron: React.FC = () => {
       sx={{
         width: '100%',
         minHeight: 750,
-        backgroundImage: `url(${'/images/home_jumbotron_bg.png'})`,
+        backgroundImage: `url(${'/images/home_jumbotron_bg_1.png'})`,
         backgroundSize: 'auto',
         backgroundRepeat: 'no-repeat',
-        textAlign: 'center',
-        marginTop: -12,
         paddingBottom: 20
       }}
     >
-      {/* Battlefield 1 Logo */}
-      <img
-        style={{ width: '50%', marginTop: 100 }}
-        src="/images/battlefield_1_logo.png"
-        alt="Battlefield 1 Logo"
-      />
 
       {/* Full Video */}
       <FullVideo
@@ -64,7 +56,7 @@ const Jumbotron: React.FC = () => {
       <Box
         sx={{
           paddingX: 45,
-          marginTop: 60
+          paddingTop: '400px'
         }}
       >
         <Grid container spacing={5} alignContent='center' alignItems="center">

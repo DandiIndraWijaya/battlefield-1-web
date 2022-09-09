@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import BgMusic from '../../common/BgMusic'
-import Layout from '../../common/Layout'
+import { Box } from '@mui/material'
 
+import Layout from '../../common/Layout'
 import PageLoader from '../../common/PageLoader'
 import Jumbotron from './Jumbotron'
 import WarStory from './WarStory'
@@ -24,14 +24,19 @@ const HomeComponent: React.FC = () => {
   }
 
   return (
-    <Layout>
-      <BgMusic
-        isBgMusicPlaying={isBgMusicPlaying}
-        toggleBgMusic={toggleBgMusic}
-      />
-      <Jumbotron />
-      <WarStory />
-      <Soundtrack />
+    <Layout
+      isBgMusicPlaying={isBgMusicPlaying}
+      toggleBgMusic={toggleBgMusic}
+    >
+      <Box id="trailer">
+        <Jumbotron />
+      </Box>
+      <Box id="warStory">
+        <WarStory />
+      </Box>
+      <Box id="soundtrack">
+        <Soundtrack />
+      </Box>
     </Layout>
   )
 }
