@@ -4,8 +4,8 @@ import { Box } from '@mui/material'
 import Layout from '../../common/Layout'
 import PageLoader from '../../common/PageLoader'
 import Jumbotron from './Jumbotron'
-import WarStory from './WarStory'
-import Soundtrack from './Sountrack'
+// import WarStory from './WarStory'
+// import Soundtrack from './Sountrack'
 
 const HomeComponent: React.FC = () => {
   const [showPageLoader, setShowPageLoader] = useState(true)
