@@ -1,12 +1,16 @@
-import React from 'react'
-import { Box } from '@mui/material'
+import React, { useState } from 'react'
+import { Box, useMediaQuery, IconButton } from '@mui/material'
+import responsive from '../../../src/utils'
 import BgMusic from '../BgMusic'
 import {
   SlideshowTwoTone,
   AutoStoriesTwoTone,
-  LibraryMusicTwoTone
+  LibraryMusicTwoTone,
+  Menu,
+  MenuOpen
 } from '@mui/icons-material'
 import NavigationItem from './NavigationItem'
+import Drawer from './Drawer'
 
 interface Props {
   isBgMusicPlaying: boolean
@@ -19,7 +23,7 @@ const navigations = [
     icon: <SlideshowTwoTone
       sx={{
         color: 'primary.main',
-        fontSize: 50
+        fontSize: '35px'
       }}
     />,
     target: '#trailer'
@@ -29,7 +33,7 @@ const navigations = [
     icon: <AutoStoriesTwoTone
       sx={{
         color: 'primary.main',
-        fontSize: 50
+        fontSize: '35px'
       }}
     />,
     target: '#warStory'
@@ -39,7 +43,7 @@ const navigations = [
     icon: <LibraryMusicTwoTone
       sx={{
         color: 'primary.main',
-        fontSize: 50
+        fontSize: '35px'
       }}
     />,
     target: '#soundtrack'
@@ -50,6 +54,56 @@ const Navigation: React.FC<Props> = ({
   isBgMusicPlaying,
   toggleBgMusic
 }) => {
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+
+  // const isTablet = useMediaQuery(responsive.isTablet)
+  // const isDesktop = useMediaQuery(responsive.isDesktop)
+  const isMobile = useMediaQuery(responsive.isMobile)
+
+  const toggleMobNav = (): void => {
+    setIsMobileNavOpen(!isMobileNavOpen)
+  }
+
+  if (isMobile) {
+    return (
+      <>
+        <Box
+          sx={{
+            position: 'fixed',
+            right: '0px',
+            top: '0px',
+            textAlign: 'right'
+          }}
+        >
+          {
+            isMobileNavOpen
+              ? <IconButton onClick={toggleMobNav}>
+                  <MenuOpen
+                    sx={{
+                      color: 'primary.main'
+                    }}
+                    fontSize='large'
+                  />
+                </IconButton>
+              : <IconButton onClick={toggleMobNav}>
+                  <Menu
+                    sx={{
+                      color: 'white'
+                    }}
+                    fontSize='large'
+                  />
+                </IconButton>
+          }
+          <Drawer
+            navigations={navigations}
+            isOpen={isMobileNavOpen}
+            isBgMusicPlaying={isBgMusicPlaying}
+            toggleBgMusic={toggleBgMusic}
+          />
+        </Box>
+      </>
+    )
+  }
   return (
     <Box
       sx={{

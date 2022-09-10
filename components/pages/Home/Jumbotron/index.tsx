@@ -1,32 +1,19 @@
 import React, { useState } from 'react'
-import { Box, Grid } from '@mui/material'
+import { Box, useMediaQuery } from '@mui/material'
+import responsive from '../../../../src/utils'
+import trailers from '../../../../data/trailer'
 
 import VideoItem from './VideoItem'
 import FullVideo from './FullVideo'
 
 const Jumbotron: React.FC = () => {
-  const videos = [
-    {
-      title: 'Reveal Trailer',
-      full: 'https://www.youtube.com/watch?v=c7nRTF2SowQ&t=13s',
-      short: '/videos/trailer1.mp4'
-    },
-    // {
-    //   title: 'Gameplay Trailer',
-    //   full: 'https://www.youtube.com/watch?v=4pY3hlQEOc0',
-    //   short: '/videos/trailer2.mp4'
-    // },
-    {
-      title: 'Story Trailer',
-      full: 'https://www.youtube.com/watch?v=Bau49VAvJyo',
-      short: '/videos/trailer3.mp4'
-    }
-  ]
-
   const [playingVideo, setPlayingVideo] = useState<string>('')
+  const isTablet = useMediaQuery(responsive.isTablet)
+  const isDesktop = useMediaQuery(responsive.isDesktop)
+  const isMobile = useMediaQuery(responsive.isMobile)
 
   const onClickVideoItem = (index: number): void => {
-    const selectedVideoTrailer = videos[index].full
+    const selectedVideoTrailer = trailers[index].full
     setPlayingVideo(selectedVideoTrailer)
   }
 
@@ -39,8 +26,12 @@ const Jumbotron: React.FC = () => {
       sx={{
         width: '100%',
         minHeight: 750,
-        backgroundImage: `url(${'/images/home_jumbotron_bg_1.png'})`,
-        backgroundSize: 'auto',
+        backgroundImage: isDesktop
+          ? `url(${'/images/home_jumbotron_bg_1.png'})`
+          : isTablet && !isMobile
+            ? `url(${'/images/home_jumbotron_bg_tablet1.png'})`
+            : `url(${'/images/home_jumbotron_bg_mobile.jpg'})`,
+        backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
         paddingBottom: 20
       }}
@@ -55,24 +46,46 @@ const Jumbotron: React.FC = () => {
       {/* List of Short Videos */}
       <Box
         sx={{
-          paddingX: 45,
           paddingTop: '400px'
         }}
       >
-        <Grid container spacing={5} alignContent='center' alignItems="center">
+        <Box
+          sx={{
+            width: isDesktop
+              ? '600px'
+              : isTablet && !isMobile ? '550px' : '290px',
+            margin: 'auto',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexDirection: (isDesktop || isTablet) && !isMobile
+              ? 'row'
+              : 'column'
+          }}
+        >
           {
-            videos.map((video, key) => (
-              <Grid item key={key} md={6}>
+            trailers.map((trailer, key) => (
+              <Box
+                key={key}
+                sx={{
+                  marginBottom: (isDesktop || isTablet) && !isMobile
+                    ? 0
+                    : '20px',
+                  width: isDesktop
+                    ? '280px'
+                    : isTablet && !isMobile ? '255px' : '100%'
+                }}
+              >
                 <VideoItem
                   onClick={onClickVideoItem}
                   index={key}
-                  video={video.short}
-                  title={video.title}
+                  video={trailer.short}
+                  title={trailer.title}
                 />
-              </Grid>
+              </Box>
             ))
           }
-        </Grid>
+        </Box>
       </Box>
     </Box>
   )

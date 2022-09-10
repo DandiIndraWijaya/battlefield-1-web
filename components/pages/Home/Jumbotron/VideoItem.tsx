@@ -20,14 +20,16 @@ const VideoItem: React.FC<Props> = ({
   return (
     <Box
       sx={{
-        padding: 1,
+        padding: '8px',
         border: '1px solid',
         borderColor: onMouseOver ? 'primary.main' : 'gray',
-        borderRadius: 2
+        borderRadius: 2,
+        width: '100%',
+        margin: 'auto'
       }}
     >
       <Box
-        sx={{ textAlign: 'left', paddingX: 1 }}
+        sx={{ textAlign: 'left', paddingX: '8px' }}
       >
         <Typography
           sx={{
@@ -44,7 +46,7 @@ const VideoItem: React.FC<Props> = ({
           width: '100%',
           height: 160,
           borderRadius: 1,
-          paddingX: 1,
+          paddingX: '8px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',

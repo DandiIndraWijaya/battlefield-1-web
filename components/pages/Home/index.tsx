@@ -31,12 +31,12 @@ const HomeComponent: React.FC = () => {
       <Box id="trailer">
         <Jumbotron />
       </Box>
-      <Box id="warStory">
+      {/* <Box id="warStory">
         <WarStory />
       </Box>
       <Box id="soundtrack">
         <Soundtrack />
-      </Box>
+      </Box> */}
     </Layout>
   )
 }

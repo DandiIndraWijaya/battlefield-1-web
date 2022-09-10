@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React from 'react'
-import { Box } from '@mui/material'
+import { Box, useMediaQuery } from '@mui/material'
+import responsive from '../../../src/utils'
 import Navigation from '../Navigation'
 
 interface Props {
@@ -14,23 +15,27 @@ const Layout: React.FC<Props> = ({
   isBgMusicPlaying,
   toggleBgMusic
 }: Props) => {
+  const isMobile = useMediaQuery(responsive.isMobile)
+
   return (
     <Box
       sx={{
-        backgroundColor: '#0b0a10'
+        backgroundColor: isMobile ? '#060503' : '#0b0a10'
       }}
     >
       {/* Battlefield 1 Logo */}
       <img
         style={{
-          width: '200px',
+          width: isMobile ? '150px' : '200px',
           position: 'fixed',
-          top: '20px',
-          left: '20px'
+          top: isMobile ? 0 : '20px',
+          left: isMobile ? 0 : '20px'
         }}
         src="/images/battlefield_1_logo.png"
         alt="Battlefield 1 Logo"
       />
+
+      {/* Navigation */}
       <Navigation
         isBgMusicPlaying={isBgMusicPlaying}
         toggleBgMusic={toggleBgMusic}
