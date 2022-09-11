@@ -4,7 +4,7 @@ import { Box } from '@mui/material'
 import Layout from '../../common/Layout'
 import PageLoader from '../../common/PageLoader'
 import Jumbotron from './Jumbotron'
-// import WarStory from './WarStory'
+import WarStory from './WarStory'
 // import Soundtrack from './Sountrack'
 
 const HomeComponent: React.FC = () => {
@@ -31,10 +31,10 @@ const HomeComponent: React.FC = () => {
       <Box id="trailer">
         <Jumbotron />
       </Box>
-      {/* <Box id="warStory">
+      <Box id="warStory">
         <WarStory />
       </Box>
-      <Box id="soundtrack">
+      {/* <Box id="soundtrack">
         <Soundtrack />
       </Box> */}
     </Layout>

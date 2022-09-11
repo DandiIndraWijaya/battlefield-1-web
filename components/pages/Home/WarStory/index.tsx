@@ -4,38 +4,23 @@ import { Box, Typography, useMediaQuery } from '@mui/material'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import warStory from '../../../../data/warStory'
+import responsive from '../../../../src/utils'
 
 const WarStory: React.FC = () => {
   const [selectedStory, setSelectedStory] = useState(0)
-  const isMobile = useMediaQuery('(max-width:600px)')
-  const isTablet = useMediaQuery('(max-width:959px)')
+  const isTablet = useMediaQuery(responsive.isTablet)
+  const isDesktop = useMediaQuery(responsive.isDesktop)
+  const isMobile = useMediaQuery(responsive.isMobile)
 
   const settings = {
     className: 'center',
     centerMode: true,
-    centerPadding: isMobile ? '30px' : isTablet ? '100px' : '300px',
+    centerPadding: (isDesktop || isTablet) && !isMobile ? '30%' : '20%',
     slidesToShow: 1,
     speed: 500,
     dots: false
   }
-
-  const warStory = [
-    {
-      image: '/images/high_place.png',
-      title: 'High Place',
-      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-    },
-    {
-      image: '/images/avanti.png',
-      title: 'Avanti',
-      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-    },
-    {
-      image: '/images/the_runner.png',
-      title: 'The Runer',
-      description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'
-    }
-  ]
 
   return (
     <Box
@@ -48,14 +33,16 @@ const WarStory: React.FC = () => {
           textAlign: 'center',
           color: 'gray',
           letterSpacing: 2,
-          fontSize: 40,
+          fontSize: (isDesktop || isTablet) && !isMobile ? '40px' : '28px',
           fontWeight: 'semi-bold'
         }}>
         War Story
       </Typography>
       <Box
         sx={{
-          paddingX: 30,
+          paddingX: isDesktop
+            ? '200px'
+            : isTablet && !isMobile ? '100px' : '35px',
           marginTop: -2
         }}
       >
@@ -80,7 +67,7 @@ const WarStory: React.FC = () => {
             sx={{
               textAlign: 'center',
               color: '#ffff',
-              fontSize: 28,
+              fontSize: (isDesktop || isTablet) && !isMobile ? '28px' : '18px',
               textDecoration: 'underline',
               fontWeight: 'semi-bold',
               letterSpacing: 2
@@ -91,7 +78,7 @@ const WarStory: React.FC = () => {
           <Typography
             sx={{
               color: '#ffff',
-              fontSize: 18,
+              fontSize: (isDesktop || isTablet) && !isMobile ? '18px' : '14px',
               marginTop: 3,
               letterSpacing: 2
             }}

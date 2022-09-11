@@ -33,7 +33,7 @@ const Jumbotron: React.FC = () => {
             : `url(${'/images/home_jumbotron_bg_mobile.jpg'})`,
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
-        paddingBottom: 20
+        paddingBottom: (isDesktop || isTablet) && !isMobile ? 20 : '80px'
       }}
     >
 

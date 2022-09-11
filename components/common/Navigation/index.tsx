@@ -56,7 +56,7 @@ const Navigation: React.FC<Props> = ({
 }) => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
-  // const isTablet = useMediaQuery(responsive.isTablet)
+  const isTablet = useMediaQuery(responsive.isTablet)
   // const isDesktop = useMediaQuery(responsive.isDesktop)
   const isMobile = useMediaQuery(responsive.isMobile)
 
@@ -64,7 +64,7 @@ const Navigation: React.FC<Props> = ({
     setIsMobileNavOpen(!isMobileNavOpen)
   }
 
-  if (isMobile) {
+  if (isMobile || isTablet) {
     return (
       <>
         <Box
@@ -72,7 +72,8 @@ const Navigation: React.FC<Props> = ({
             position: 'fixed',
             right: '0px',
             top: '0px',
-            textAlign: 'right'
+            textAlign: 'right',
+            zIndex: 99999
           }}
         >
           {

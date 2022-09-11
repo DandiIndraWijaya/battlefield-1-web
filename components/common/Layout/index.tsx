@@ -29,7 +29,8 @@ const Layout: React.FC<Props> = ({
           width: isMobile ? '150px' : '200px',
           position: 'fixed',
           top: isMobile ? 0 : '20px',
-          left: isMobile ? 0 : '20px'
+          left: isMobile ? 0 : '20px',
+          zIndex: 99999
         }}
         src="/images/battlefield_1_logo.png"
         alt="Battlefield 1 Logo"
