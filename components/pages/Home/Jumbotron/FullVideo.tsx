@@ -1,6 +1,7 @@
 import React from 'react'
-import { Box, IconButton } from '@mui/material'
+import { Box, IconButton, useMediaQuery } from '@mui/material'
 import { Close } from '@mui/icons-material'
+import responsive from '../../../../src/utils'
 import ReactPlayer from 'react-player/youtube'
 
 interface Props {
@@ -9,6 +10,10 @@ interface Props {
 }
 
 const FullVideo: React.FC<Props> = ({ video, onCloseVideo }: Props) => {
+  const isTablet = useMediaQuery(responsive.isTablet)
+  const isDesktop = useMediaQuery(responsive.isDesktop)
+  const isMobile = useMediaQuery(responsive.isMobile)
+
   if (video === '') {
     return <></>
   }
@@ -19,11 +24,13 @@ const FullVideo: React.FC<Props> = ({ video, onCloseVideo }: Props) => {
         textAlign: 'center',
         margin: 'auto',
         width: '100%',
-        height: '100%',
+        height: '100vh',
         zIndex: 9999,
         paddingY: 3,
         position: 'fixed',
-        paddingX: 20,
+        paddingX: isDesktop
+          ? '100px'
+          : isTablet && !isMobile ? '30px' : '10px',
         top: 0
       }}
     >
