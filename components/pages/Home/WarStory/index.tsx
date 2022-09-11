@@ -25,7 +25,7 @@ const WarStory: React.FC = () => {
   return (
     <Box
       sx={{
-        paddingBottom: 20
+        paddingBottom: (isDesktop || isTablet) && !isMobile ? 20 : '80px'
       }}
     >
       <Typography

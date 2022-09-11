@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, useMediaQuery } from '@mui/material'
+import responsive from '../../../../src/utils'
 import SoundtrackItem from './SoundtrackItem'
 import soundtracks from '../../../../data/soundtrack'
 
@@ -9,6 +10,10 @@ const Soundtrack: React.FC = () => {
   const [soundtrackPlayedTime, setSountrackPlayedTime] = useState('0')
   const [soundtrackCurrentTime, setSoundtrackCurrentTime] = useState(0)
   const [soundtrackPause, setSoundtrackPause] = useState(false)
+
+  const isTablet = useMediaQuery(responsive.isTablet)
+  const isDesktop = useMediaQuery(responsive.isDesktop)
+  const isMobile = useMediaQuery(responsive.isMobile)
   const soundtrackPlaying = useRef(new Audio(''))
 
   const onChangePlayingIndex = (index: number): void => {
@@ -89,7 +94,9 @@ const Soundtrack: React.FC = () => {
       >
         <Box
           sx={{
-            width: '30%',
+            width: isDesktop
+              ? '40%'
+              : isTablet && !isMobile ? '65%' : '80%',
             backgroundColor: 'rgba(23, 23, 29, 0.83)',
             height: '500px'
           }}

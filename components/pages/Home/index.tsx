@@ -5,7 +5,7 @@ import Layout from '../../common/Layout'
 import PageLoader from '../../common/PageLoader'
 import Jumbotron from './Jumbotron'
 import WarStory from './WarStory'
-// import Soundtrack from './Sountrack'
+import Soundtrack from './Sountrack'
 
 const HomeComponent: React.FC = () => {
   const [showPageLoader, setShowPageLoader] = useState(true)
@@ -34,9 +34,9 @@ const HomeComponent: React.FC = () => {
       <Box id="warStory">
         <WarStory />
       </Box>
-      {/* <Box id="soundtrack">
+      <Box id="soundtrack">
         <Soundtrack />
-      </Box> */}
+      </Box>
     </Layout>
   )
 }
