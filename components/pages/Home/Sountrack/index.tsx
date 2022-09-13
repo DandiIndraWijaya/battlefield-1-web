@@ -78,7 +78,7 @@ const Soundtrack: React.FC = () => {
 
   return (
     <Box sx={{
-      paddingBottom: '200px'
+      paddingBottom: (isDesktop || isTablet) && !isMobile ? 20 : '80px'
     }}>
       <Box
         sx={{

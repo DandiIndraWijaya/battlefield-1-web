@@ -3,6 +3,7 @@ import React from 'react'
 import { Box, useMediaQuery } from '@mui/material'
 import responsive from '../../../src/utils'
 import Navigation from '../Navigation'
+import Footer from '../Footer'
 
 interface Props {
   children: React.ReactNode
@@ -42,6 +43,9 @@ const Layout: React.FC<Props> = ({
         toggleBgMusic={toggleBgMusic}
       />
       {children}
+
+      {/* Footer */}
+      <Footer />
     </Box>
   )
 }

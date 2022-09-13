@@ -16,7 +16,9 @@ const WarStory: React.FC = () => {
   const settings = {
     className: 'center',
     centerMode: true,
-    centerPadding: (isDesktop || isTablet) && !isMobile ? '30%' : '20%',
+    centerPadding: isDesktop
+      ? '33%'
+      : isTablet && !isMobile ? '30%' : '20%',
     slidesToShow: 1,
     speed: 500,
     dots: false
