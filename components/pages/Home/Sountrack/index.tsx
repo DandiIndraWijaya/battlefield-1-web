@@ -163,8 +163,9 @@ const Soundtrack: React.FC<Props> = ({ isVideoPopUp }: Props) => {
           </Box>
           <Box sx={{
             marginTop: '20px',
-            height: '410px',
-            overflowY: 'scroll'
+            height: '400px',
+            overflowY: 'scroll',
+            paddingTop: '10px'
           }}>
             {
               soundtracks.map((soundtrack, key) => {
