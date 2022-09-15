@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Box, useMediaQuery, IconButton } from '@mui/material'
 import responsive from '../../../src/utils'
-import BgMusic from '../BgMusic'
 import {
   SlideshowTwoTone,
   AutoStoriesTwoTone,
@@ -11,9 +10,10 @@ import {
 } from '@mui/icons-material'
 import NavigationItem from './NavigationItem'
 import Drawer from './Drawer'
+import PlaySoundtrack from './PlaySoundtrack'
 
 interface Props {
-  isBgMusicPlaying: boolean
+  isSoundtrackPlaying: boolean
   toggleBgMusic: () => void
 }
 
@@ -51,7 +51,7 @@ const navigations = [
 ]
 
 const Navigation: React.FC<Props> = ({
-  isBgMusicPlaying,
+  isSoundtrackPlaying,
   toggleBgMusic
 }) => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
@@ -98,7 +98,7 @@ const Navigation: React.FC<Props> = ({
           <Drawer
             navigations={navigations}
             isOpen={isMobileNavOpen}
-            isBgMusicPlaying={isBgMusicPlaying}
+            isSoundtrackPlaying={isSoundtrackPlaying}
             toggleBgMusic={toggleBgMusic}
           />
         </Box>
@@ -117,15 +117,12 @@ const Navigation: React.FC<Props> = ({
         alignItems: 'flex-end'
       }}
     >
-      <BgMusic
-        isBgMusicPlaying={isBgMusicPlaying}
-        toggleBgMusic={toggleBgMusic}
-      />
       {
         navigations.map((navigation, key) => {
           return (
             <NavigationItem
               key={key}
+              index={key}
               title={navigation.title}
               icon={navigation.icon}
               target={navigation.target}
@@ -133,6 +130,18 @@ const Navigation: React.FC<Props> = ({
           )
         })
       }
+
+      <Box
+        sx={{
+          marginRight: '10px',
+          backgroundColor: 'rgba(23, 23, 29, 0.5)'
+        }}
+      >
+        <PlaySoundtrack
+          isSoundtrackPlaying={isSoundtrackPlaying}
+          toggleBgMusic={toggleBgMusic}
+        />
+      </Box>
     </Box>
   )
 }

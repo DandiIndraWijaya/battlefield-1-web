@@ -7,14 +7,14 @@ import Footer from '../Footer'
 
 interface Props {
   children: React.ReactNode
-  isBgMusicPlaying: boolean
-  toggleBgMusic: () => void
+  isSoundtrackPlaying?: boolean
+  toggleBgMusic?: () => void
 }
 
 const Layout: React.FC<Props> = ({
   children,
-  isBgMusicPlaying,
-  toggleBgMusic
+  isSoundtrackPlaying = false,
+  toggleBgMusic = () => {}
 }: Props) => {
   const isMobile = useMediaQuery(responsive.isMobile)
 
@@ -39,7 +39,7 @@ const Layout: React.FC<Props> = ({
 
       {/* Navigation */}
       <Navigation
-        isBgMusicPlaying={isBgMusicPlaying}
+        isSoundtrackPlaying={isSoundtrackPlaying}
         toggleBgMusic={toggleBgMusic}
       />
       {children}

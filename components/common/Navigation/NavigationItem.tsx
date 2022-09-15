@@ -2,12 +2,18 @@ import React from 'react'
 import { Box, Typography } from '@mui/material'
 
 interface Props {
+  index: number
   title: string
   icon: any
   target: string
 }
 
-const NavigationItem: React.FC<Props> = ({ title, icon, target }: Props) => {
+const NavigationItem: React.FC<Props> = ({
+  index,
+  title,
+  icon,
+  target
+}: Props) => {
   const onClick = (): void => {
     window.scrollTo(0, 257)
   }
@@ -17,7 +23,7 @@ const NavigationItem: React.FC<Props> = ({ title, icon, target }: Props) => {
       href={target}
       style={{
         textDecoration: 'none',
-        marginBottom: '5px'
+        marginBottom: index === 2 ? 0 : '5px'
       }}
       onClick={onClick}
     >

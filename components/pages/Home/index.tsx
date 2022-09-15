@@ -9,10 +9,16 @@ import Soundtrack from './Sountrack'
 
 const HomeComponent: React.FC = () => {
   const [showPageLoader, setShowPageLoader] = useState(true)
-  const [isBgMusicPlaying, setIsBgMusicPlaying] = useState(false)
+  const [playingIndex, setPlayingIndex] = useState(-1)
+  const [isSoundtrackPlaying, setIsSoundtrackPlaying] = useState(false)
+  const [isSoundtrackPause, setIsSoundtrackPause] = useState(false)
 
   const toggleBgMusic = (): void => {
-    setIsBgMusicPlaying(!isBgMusicPlaying)
+    setIsSoundtrackPlaying(!isSoundtrackPlaying)
+  }
+
+  const onPlayMusic = (isPlay: boolean): void => {
+    setIsSoundtrackPlaying(isPlay)
   }
 
   useEffect(() => {
@@ -25,7 +31,7 @@ const HomeComponent: React.FC = () => {
 
   return (
     <Layout
-      isBgMusicPlaying={isBgMusicPlaying}
+      isSoundtrackPlaying={isSoundtrackPlaying}
       toggleBgMusic={toggleBgMusic}
     >
       <Box id="trailer">
@@ -35,7 +41,11 @@ const HomeComponent: React.FC = () => {
         <WarStory />
       </Box>
       <Box id="soundtrack">
-        <Soundtrack />
+        <Soundtrack
+          onPlay={onPlayMusic}
+          isPlay={isSoundtrackPlaying}
+          isPause={isSoundtrackPause}
+        />
       </Box>
     </Layout>
   )

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import React, { useEffect, useState, useRef } from 'react'
+import React from 'react'
 import { Box, IconButton } from '@mui/material'
 import {
   PlayCircle,
@@ -7,39 +7,21 @@ import {
 } from '@mui/icons-material'
 
 interface Props {
-  isBgMusicPlaying: boolean
+  isSoundtrackPlaying: boolean
   toggleBgMusic: () => void
 }
 
-const BgMusic: React.FC<Props> = ({
-  isBgMusicPlaying,
+const PlaySoundtrack: React.FC<Props> = ({
+  isSoundtrackPlaying,
   toggleBgMusic
 }: Props) => {
-  const [hasError, setHasError] = useState(false)
-  const bgMusic = useRef(new Audio('/sounds/battlefield_one.mp3'))
-
-  bgMusic.current.onplay = () => {
-    setHasError(false)
-  }
-
-  useEffect(() => {
-    if (isBgMusicPlaying) {
-      bgMusic.current.play().then(() => {
-      }).catch(() => {
-        setHasError(true)
-      })
-    } else if (!hasError) {
-      bgMusic.current.pause()
-    }
-  }, [isBgMusicPlaying, hasError])
-
   return (
     <Box>
       <IconButton
         onClick={toggleBgMusic}
       >
         {
-          isBgMusicPlaying
+          isSoundtrackPlaying
             ? <PauseCircle
                 sx={{
                   color: 'primary.main',
@@ -58,4 +40,4 @@ const BgMusic: React.FC<Props> = ({
   )
 }
 
-export default BgMusic
+export default PlaySoundtrack

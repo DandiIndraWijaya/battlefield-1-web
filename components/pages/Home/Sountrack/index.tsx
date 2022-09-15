@@ -4,7 +4,17 @@ import responsive from '../../../../src/utils'
 import SoundtrackItem from './SoundtrackItem'
 import soundtracks from '../../../../data/soundtrack'
 
-const Soundtrack: React.FC = () => {
+interface Props {
+  onPlay: (isPlay: boolean) => void
+  isPlay: boolean
+  isPause: boolean
+}
+
+const Soundtrack: React.FC<Props> = ({
+  onPlay,
+  isPlay,
+  isPause
+}: Props) => {
   const [playingIndex, setPlayingIndex] = useState(-1)
   const [soundtrackBuffer, setSoundtrackBuffer] = useState('0')
   const [soundtrackPlayedTime, setSountrackPlayedTime] = useState('0')
@@ -20,13 +30,16 @@ const Soundtrack: React.FC = () => {
     if (index === playingIndex) {
       if (soundtrackPause) {
         setSoundtrackPause(false)
+        onPlay(true)
         soundtrackPlaying.current.play().then(() => {})
           .catch(() => console.log('error'))
       } else {
         setSoundtrackPause(true)
+        onPlay(false)
         soundtrackPlaying.current.pause()
       }
     } else {
+      onPlay(true)
       setSoundtrackBuffer('0')
       setSountrackPlayedTime('0')
       setSoundtrackCurrentTime(0)

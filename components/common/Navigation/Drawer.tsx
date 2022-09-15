@@ -10,14 +10,14 @@ interface Props {
     target: string
   }>
   isOpen: boolean
-  isBgMusicPlaying: boolean
+  isSoundtrackPlaying: boolean
   toggleBgMusic: () => void
 }
 
 const Drawer: React.FC<Props> = ({
   navigations,
   isOpen,
-  isBgMusicPlaying,
+  isSoundtrackPlaying,
   toggleBgMusic
 }) => {
   return (
@@ -41,6 +41,7 @@ const Drawer: React.FC<Props> = ({
           return (
             <NavigationItem
               key={key}
+              index={key}
               title={navigation.title}
               icon={navigation.icon}
               target={navigation.target}
