@@ -6,7 +6,11 @@ import trailers from '../../../../data/trailer'
 import VideoItem from './VideoItem'
 import FullVideo from './FullVideo'
 
-const Jumbotron: React.FC = () => {
+interface Props {
+  onVideoPopUp: (isPopUp: boolean) => void
+}
+
+const Jumbotron: React.FC<Props> = ({ onVideoPopUp }: Props) => {
   const [playingVideo, setPlayingVideo] = useState<string>('')
   const isTablet = useMediaQuery(responsive.isTablet)
   const isDesktop = useMediaQuery(responsive.isDesktop)
@@ -14,10 +18,12 @@ const Jumbotron: React.FC = () => {
 
   const onClickVideoItem = (index: number): void => {
     const selectedVideoTrailer = trailers[index].full
+    onVideoPopUp(true)
     setPlayingVideo(selectedVideoTrailer)
   }
 
   const onCloseVideo = (): void => {
+    onVideoPopUp(false)
     setPlayingVideo('')
   }
 

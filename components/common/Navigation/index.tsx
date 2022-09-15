@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Box, useMediaQuery, IconButton } from '@mui/material'
 import responsive from '../../../src/utils'
-import BgMusic from '../BgMusic'
+// import BgMusic from '../BgMusic'
 import {
   SlideshowTwoTone,
   AutoStoriesTwoTone,
@@ -117,10 +117,10 @@ const Navigation: React.FC<Props> = ({
         alignItems: 'flex-end'
       }}
     >
-      <BgMusic
+      {/* <BgMusic
         isBgMusicPlaying={isBgMusicPlaying}
         toggleBgMusic={toggleBgMusic}
-      />
+      /> */}
       {
         navigations.map((navigation, key) => {
           return (

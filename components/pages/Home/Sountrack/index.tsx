@@ -4,7 +4,11 @@ import responsive from '../../../../src/utils'
 import SoundtrackItem from './SoundtrackItem'
 import soundtracks from '../../../../data/soundtrack'
 
-const Soundtrack: React.FC = () => {
+interface Props {
+  isVideoPopUp: boolean
+}
+
+const Soundtrack: React.FC<Props> = ({ isVideoPopUp }: Props) => {
   const [playingIndex, setPlayingIndex] = useState(-1)
   const [soundtrackBuffer, setSoundtrackBuffer] = useState('0')
   const [soundtrackPlayedTime, setSountrackPlayedTime] = useState('0')
@@ -16,22 +20,30 @@ const Soundtrack: React.FC = () => {
   const isMobile = useMediaQuery(responsive.isMobile)
   const soundtrackPlaying = useRef(new Audio(''))
 
+  const controllPlayer = (): void => {
+    if (soundtrackPause) {
+      setSoundtrackPause(false)
+      soundtrackPlaying.current.play().then(() => {})
+        .catch(() => console.log('error'))
+    } else {
+      setSoundtrackPause(true)
+      soundtrackPlaying.current.pause()
+    }
+  }
+
+  const resetPlayer = (index: number): void => {
+    setSoundtrackBuffer('0')
+    setSountrackPlayedTime('0')
+    setSoundtrackCurrentTime(0)
+    setSoundtrackPause(false)
+    setPlayingIndex(index)
+  }
+
   const onChangePlayingIndex = (index: number): void => {
     if (index === playingIndex) {
-      if (soundtrackPause) {
-        setSoundtrackPause(false)
-        soundtrackPlaying.current.play().then(() => {})
-          .catch(() => console.log('error'))
-      } else {
-        setSoundtrackPause(true)
-        soundtrackPlaying.current.pause()
-      }
+      controllPlayer()
     } else {
-      setSoundtrackBuffer('0')
-      setSountrackPlayedTime('0')
-      setSoundtrackCurrentTime(0)
-      setSoundtrackPause(false)
-      setPlayingIndex(index)
+      resetPlayer(index)
     }
   }
 
@@ -46,7 +58,6 @@ const Soundtrack: React.FC = () => {
   const loop = (): void => {
     if (playingIndex !== -1) {
       const buffered = soundtrackPlaying.current.buffered
-      console.log(buffered)
       let loaded
       let played
       if (buffered.length !== 0) {
@@ -56,13 +67,39 @@ const Soundtrack: React.FC = () => {
         setSoundtrackCurrentTime(soundtrackPlaying.current.currentTime)
         setSoundtrackBuffer(loaded.toFixed(2))
         setSountrackPlayedTime(played.toFixed(2))
-
-        soundtrackPlaying.current.onended = () => setPlayingIndex(-1)
       }
       setTimeout(loop, 50)
     }
   }
 
+  soundtrackPlaying.current.onended = () => {
+    if (playingIndex + 1 === soundtracks.length) {
+      resetPlayer(0)
+    } else {
+      resetPlayer(playingIndex + 1)
+    }
+  }
+
+  // Action when video is pop up
+  const [isSoundtrackPlayingBeforeVideoPopUp,
+    setIsSoundtrackPlayingBeforeVideoPopUp] = useState(false)
+  useEffect(() => {
+    if (playingIndex !== -1) {
+      if (isVideoPopUp) {
+        setIsSoundtrackPlayingBeforeVideoPopUp(!soundtrackPause)
+        setSoundtrackPause(true)
+        soundtrackPlaying.current.pause()
+      } else {
+        if (isSoundtrackPlayingBeforeVideoPopUp) {
+          setSoundtrackPause(false)
+          soundtrackPlaying.current.play().then(() => {})
+            .catch(() => console.log('error'))
+        }
+      }
+    }
+  }, [isVideoPopUp])
+
+  // Play new music
   useEffect(() => {
     setSoundtrackPause(false)
     if (playingIndex !== -1) {

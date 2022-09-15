@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, useMediaQuery } from '@mui/material'
 import { PlayCircleFilled, PauseCircleFilled } from '@mui/icons-material'
 import convertTime from '../../../../src/time'
-// import ReactSlider from 'react-slider'
+import responsive from '../../../../src/utils'
 
 interface Props {
   title: string
@@ -32,6 +32,9 @@ const SoundtrackItem: React.FC<Props> = ({
   index
 }: Props) => {
   const [isMouseOver, setIsOuMouseOver] = useState(false)
+
+  const isTablet = useMediaQuery(responsive.isTablet)
+  const isMobile = useMediaQuery(responsive.isMobile)
 
   const onMouseOver = (): void => {
     setIsOuMouseOver(true)
@@ -63,7 +66,10 @@ const SoundtrackItem: React.FC<Props> = ({
           isPlay && isPause && <PlayCircleFilled
             sx={{
               marginTop: '5px',
-              color: isMouseOver || isPlay ? 'primary.main' : 'gray'
+              color: (isMouseOver && !isMobile && !isTablet) ||
+              isPlay
+                ? 'primary.main'
+                : 'gray'
             }}
           />
         }
@@ -71,7 +77,10 @@ const SoundtrackItem: React.FC<Props> = ({
           isPlay && !isPause && <PauseCircleFilled
             sx={{
               marginTop: '5px',
-              color: isMouseOver || isPlay ? 'primary.main' : 'gray'
+              color: (isMouseOver && !isMobile && !isTablet) ||
+              isPlay
+                ? 'primary.main'
+                : 'gray'
             }}
           />
         }
@@ -79,7 +88,10 @@ const SoundtrackItem: React.FC<Props> = ({
           !isPlay && <PlayCircleFilled
             sx={{
               marginTop: '5px',
-              color: isMouseOver || isPlay ? 'primary.main' : 'gray'
+              color: (isMouseOver && !isMobile && !isTablet) ||
+              isPlay
+                ? 'primary.main'
+                : 'gray'
             }}
           />
         }
@@ -94,7 +106,10 @@ const SoundtrackItem: React.FC<Props> = ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            color: isMouseOver || isPlay ? 'primary.main' : 'gray',
+            color: (isMouseOver && !isMobile && !isTablet) ||
+            isPlay
+              ? 'primary.main'
+              : 'gray',
             cursor: 'pointer'
           }}
           onClick={() => onClick(index)}

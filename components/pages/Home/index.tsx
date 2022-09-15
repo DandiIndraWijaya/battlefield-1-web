@@ -10,9 +10,14 @@ import Soundtrack from './Sountrack'
 const HomeComponent: React.FC = () => {
   const [showPageLoader, setShowPageLoader] = useState(true)
   const [isBgMusicPlaying, setIsBgMusicPlaying] = useState(false)
+  const [isVideoPopUp, setIsVideoPopUp] = useState(false)
 
   const toggleBgMusic = (): void => {
     setIsBgMusicPlaying(!isBgMusicPlaying)
+  }
+
+  const onVideoPopUp = (isPopUp: boolean): void => {
+    setIsVideoPopUp(isPopUp)
   }
 
   useEffect(() => {
@@ -29,13 +34,17 @@ const HomeComponent: React.FC = () => {
       toggleBgMusic={toggleBgMusic}
     >
       <Box id="trailer">
-        <Jumbotron />
+        <Jumbotron
+          onVideoPopUp={onVideoPopUp}
+        />
       </Box>
       <Box id="warStory">
         <WarStory />
       </Box>
       <Box id="soundtrack">
-        <Soundtrack />
+        <Soundtrack
+          isVideoPopUp={isVideoPopUp}
+        />
       </Box>
     </Layout>
   )
