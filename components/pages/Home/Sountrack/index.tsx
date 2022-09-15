@@ -161,7 +161,11 @@ const Soundtrack: React.FC<Props> = ({ isVideoPopUp }: Props) => {
             Johan Söderqvist & Patrik Andrén
             </Typography>
           </Box>
-          <Box sx={{ marginTop: '20px' }}>
+          <Box sx={{
+            marginTop: '20px',
+            height: '410px',
+            overflowY: 'scroll'
+          }}>
             {
               soundtracks.map((soundtrack, key) => {
                 return (

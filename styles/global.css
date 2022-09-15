@@ -78,3 +78,23 @@ background-color: #F17F1A;
 input[type="range"]::-ms-fill-upper {  
 background-color: #9a905d;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(23, 23, 29, 0.83);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
