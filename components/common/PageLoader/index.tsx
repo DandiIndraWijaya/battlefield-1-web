@@ -58,7 +58,7 @@ const PageLoader: React.FC = () => {
     >
       <img
         style={{
-          width: (isDesktop || isTablet) && !isMobile ? '50%' : '100%'
+          width: (isDesktop || isTablet) && !isMobile ? '50%' : '80%'
         }}
         src="/images/battlefield_1_logo.png"
         alt="Battlefield 1 Logo"

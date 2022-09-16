@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import warStory from '../../../../data/warStory'
 import responsive from '../../../../src/utils'
+import style from './warStory.module.css'
 
 const WarStory: React.FC = () => {
   const [selectedStory, setSelectedStory] = useState(0)
@@ -77,16 +78,23 @@ const WarStory: React.FC = () => {
           >
             {warStory[selectedStory].title}
           </Typography>
-          <Typography
+          <Box
             sx={{
-              color: '#ffff',
-              fontSize: (isDesktop || isTablet) && !isMobile ? '18px' : '14px',
-              marginTop: 3,
-              letterSpacing: 2
+              height: '400px',
+              overflowY: 'scroll'
             }}
           >
-            {warStory[selectedStory].description}
-          </Typography>
+            <Typography
+              sx={{
+                color: '#ffff',
+                fontSize: (isDesktop || isTablet) && !isMobile ? '18px' : '14px',
+                marginTop: 3,
+                letterSpacing: 2
+              }}
+            >
+              <div className={style.warStory} dangerouslySetInnerHTML={{ __html: warStory[selectedStory].description }} />
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </Box>

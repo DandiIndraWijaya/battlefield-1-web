@@ -134,8 +134,7 @@ const Soundtrack: React.FC<Props> = ({ isVideoPopUp }: Props) => {
             width: isDesktop
               ? '40%'
               : isTablet && !isMobile ? '65%' : '80%',
-            backgroundColor: 'rgba(23, 23, 29, 0.83)',
-            height: '500px'
+            backgroundColor: 'rgba(23, 23, 29, 0.83)'
           }}
         >
           <Box
@@ -165,7 +164,7 @@ const Soundtrack: React.FC<Props> = ({ isVideoPopUp }: Props) => {
             marginTop: '20px',
             height: '400px',
             overflowY: 'scroll',
-            paddingTop: '10px'
+            paddingBottom: '10px'
           }}>
             {
               soundtracks.map((soundtrack, key) => {
