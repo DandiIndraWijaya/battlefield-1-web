@@ -164,7 +164,7 @@ const Soundtrack: React.FC<Props> = ({ isVideoPopUp }: Props) => {
             marginTop: '20px',
             height: '400px',
             overflowY: 'scroll',
-            paddingBottom: '10px'
+            paddingY: '10px'
           }}>
             {
               soundtracks.map((soundtrack, key) => {
